@@ -3,7 +3,7 @@ const fs = require("fs");
 
 module.exports.run = async (bot, message, args) => {
 
-    let custPrefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
+    let custPrefixes = JSON.parse(fs.readFileSync("../prefixes.json", "utf8"));
 
     if(!message.member.roles.some(r=>["Owner"].includes(r.name))){
         return message.author.send("You do not have the permissions to set prefixes.");
@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
         custPrefixes: args[0], rpgPrefixes: custPrefixes[message.guild.id].rpgPrefixes
     };
 
-    fs.writeFile("./prefixes.json", JSON.stringify(custPrefixes), (err) => {
+    fs.writeFile("../prefixes.json", JSON.stringify(custPrefixes), (err) => {
         if (err) console.leg(err)
     });
 
