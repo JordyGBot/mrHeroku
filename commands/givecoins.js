@@ -4,8 +4,8 @@ const ms = require("ms");
 
 module.exports.run = async (bot, message, args) => {
 
-    let coinFile = JSON.parse(fs.readFileSync("./coins.json", "utf8"));
-    let custPrefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
+    let coinFile = JSON.parse(fs.readFileSync("../coins.json", "utf8"));
+    let custPrefixes = JSON.parse(fs.readFileSync("../prefixes.json", "utf8"));
 
     if(!message.member.roles.some(r=>["Owner", "Admin"].includes(r.name))){
         
