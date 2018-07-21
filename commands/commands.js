@@ -3,7 +3,7 @@ const fs = require("fs");
 
 module.exports.run = (bot, message, args) => {
 
-	let customPrefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
+	let customPrefixes = JSON.parse(fs.readFileSync("../prefixes.json", "utf8"));
 	let guildPrefix = customPrefixes[message.guild.id].custPrefixes;
 
 	let commandsembed = new Discord.RichEmbed()
