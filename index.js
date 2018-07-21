@@ -9,17 +9,14 @@ let coinFile = JSON.parse(fs.readFileSync("./coins.json", "utf8"));
 bot.rpgcomponents = new Discord.Collection();
 
 fs.readdir("./rpgfolder/", (err,files) =>{
-	if (err) console.leg(err);
 
 	let rpgjsfile = files.filter(f => f.split(".").pop() === "js")
 	if (rpgjsfile.length <= 0){
-		console.log("Could not load RPG Module");
 		return;
 	}
 
 	rpgjsfile.forEach((f,i) => {
 		let rpgprops = require(`./rpgfolder/${f}`);
-		console.log(`${f} loaded!`);
 		bot.rpgcomponents.set(rpgprops.help.name, rpgprops);
 	});
 })
@@ -28,38 +25,31 @@ bot.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) =>{
 
-	if(err) console.log(err);
-
 	let jsfile = files.filter(f => f.split(".").pop() === "js");
 	
 	if (jsfile.length <= 0){
-		console.log("Could not find commands.");
 		return;
 	}
 
 	jsfile.forEach((f, i) => {
 		let props = require(`./commands/${f}`);
-		console.log(`${f} loaded!`);
 		bot.commands.set(props.help.name, props);
 	});
 
 });
 
 bot.on("ready", async () => {
-	console.log(`${bot.user.username} is online in ${bot.guilds.size} servers!`);
 	bot.user.setActivity("DivBot | Type [prefix]");
 });
 
 bot.on("guildMemberAdd", async member => {
 	let custPrefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
-	console.log(`${member.id} has joined the server ${member.guild.name}.`);
 	let welcomechannel = member.guild.channels.find(`name`, "general");
 	welcomechannel.send(`<@${member.id}> has joined the server! Welcome!`);
 	member.send(`The prefix for ${member.guild.name} is ${custPrefixes[member.guild.id].custPrefixes}`)
 });
 
 bot.on("guildMemberRemove", async member => {
-	console.log(`${member.id} has left the server ${member.guild.name}.`);
 	let welcomechannel = member.guild.channels.find(`name`, "general");
 	welcomechannel.send(`<@${member.id}> has left the server! Goodbye!`);
 });
@@ -78,7 +68,6 @@ bot.on("message", async message => {
 			custPrefixes: botconfig.prefix, rpgPrefixes: botconfig.rpgprefix
 		};
 		fs.writeFile("./prefixes.json", JSON.stringify(custPrefixes), (err) => {
-			if (err) console.log(err);
 		});
 	}
 
@@ -87,7 +76,6 @@ bot.on("message", async message => {
 			swords: 0, pickaxes: 0
 		};
 		fs.writeFile("./playeritems.json", JSON.stringify(playerItemFile), (err) => {
-			if (err) console.log(err);
 		});
 	}
 
@@ -96,7 +84,6 @@ bot.on("message", async message => {
 			gold: 0
 		};
 		fs.writeFile("./coins.json", JSON.stringify(coinFile), (err) => {
-			if (err) console.log(err);
 		});
 	}
 
@@ -111,7 +98,6 @@ bot.on("message", async message => {
 			gold: coinFile[message.author.id].gold + addAmount
 		};
 	fs.writeFile("./coins.json", JSON.stringify(coinFile), (err) => {
-		if (err) console.log(err);
 	});
 
 	let coinembed = new Discord.RichEmbed()
