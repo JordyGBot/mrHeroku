@@ -1,0 +1,15 @@
+{
+    
+    "Spider": {
+        "Health": 10,
+        "Flee": 1,
+        "Damage": 1
+    },
+
+    "Zombie": {
+        "Health": 25,
+        "Flee": 0,
+        "Damage": 3
+    }
+
+}
