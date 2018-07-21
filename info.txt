@@ -1,8 +1,0 @@
-Project (PRJ) = RPGBot
-Version (VER) = 0.1.1
-Author  (ATH) = xJDiviisionZ
-Testing (TST) = RPGBotTesting [Official Server]
-Public  (PBC) = True
-License (LCS) = No
-Custom  (CSM) = No
-Fixed   (FXD) = Yes
