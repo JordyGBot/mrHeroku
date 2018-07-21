@@ -1,0 +1,10 @@
+{
+    "Sword": {
+        "price": 5,
+        "strength": 1
+    },
+    "Pickaxe": {
+        "price": 10,
+        "strength": 2
+    }
+}
