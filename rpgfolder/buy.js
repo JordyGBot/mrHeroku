@@ -15,7 +15,6 @@ module.exports.run = (bot, message, args) => {
             swords: 0, pickaxes: 0
         };
         fs.writeFile("../playeritems.json", JSON.stringify(playerItemFile), (err) => {
-            if (err) console.log(err);
         });
     }
 
@@ -24,7 +23,6 @@ module.exports.run = (bot, message, args) => {
             gold: 0
         };
         fs.writeFile("../coins.json", JSON.stringify(playerCoins), (err) =>{
-            if (err) console.log(err);
         });
     }
 
@@ -45,7 +43,6 @@ module.exports.run = (bot, message, args) => {
             swords: playerItemFile[bUser.id].swords + 1, pickaxes: playerItemFile[bUser.id].pickaxes
         };
         fs.writeFile("./playeritems.json", JSON.stringify(playerItemFile), (err) => {
-            if(err) console.log(err);
         });
     }
 
@@ -54,7 +51,6 @@ module.exports.run = (bot, message, args) => {
             swords: playerItemFile[bUser.id].swords, pickaxes: playerItemFile[bUser.id].pickaxes + 1
         };
         fs.writeFile("./playeritems.json", JSON.stringify(playerItemFile), (err) => {
-            if(err) console.log(err);
         });
     }
 
