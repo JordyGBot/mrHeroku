@@ -10,8 +10,6 @@ module.exports.run = (bot, message, args) => {
 
     let chance = Math.floor((Math.random() * 10) + 1);
 
-    console.log(chance);
-
     if (chance >= 10){
         let enemy = "Spider";
 
