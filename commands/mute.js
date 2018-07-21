@@ -29,7 +29,6 @@ module.exports.run = async(bot, message, args) => {
 				});
 			});
 		}catch(e){
-			console.log(e.stack);
 		}
 	}
 
