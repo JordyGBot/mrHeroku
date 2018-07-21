@@ -1,11 +1,11 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const ms = require("ms");
-let custPrefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
+let custPrefixes = JSON.parse(fs.readFileSync("../prefixes.json", "utf8"));
 
 module.exports.run = async (bot, message, args) => {
 
-    let coinFile = JSON.parse(fs.readFileSync("./coins.json", "utf8"));
+    let coinFile = JSON.parse(fs.readFileSync("../coins.json", "utf8"));
 
     let gUser = message.author;
 
@@ -40,7 +40,7 @@ module.exports.run = async (bot, message, args) => {
         coinFile[gUser.id] = {
             gold: coinFile[gUser.id].gold - amountOfCoins
         };
-        fs.writeFile("./coins.json", JSON.stringify(coinFile), (err) => {
+        fs.writeFile("../coins.json", JSON.stringify(coinFile), (err) => {
         });
 
         let sendembed = new Discord.RichEmbed()
