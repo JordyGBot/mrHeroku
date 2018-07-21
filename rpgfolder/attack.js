@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
 const fs = require("fs");
-const mobs = require("./enemies.json");
+const mobs = require("../enemies.json");
 
 module.exports.run = (bot, message, args) => {
 
-    let coinFile = JSON.parse(fs.readFileSync("./coins.json", "utf8"));
+    let coinFile = JSON.parse(fs.readFileSync("../coins.json", "utf8"));
     
     let aUser = message.author;
 
