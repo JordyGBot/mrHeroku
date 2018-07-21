@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const fs = require("fs");
-const itemStats = require("./items.json");
+const itemStats = require("../items.json");
 
 module.exports.run = (bot, message, args) => {
 
