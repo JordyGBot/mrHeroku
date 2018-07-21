@@ -16,7 +16,6 @@ module.exports.run = async (bot, message, args) => {
             gold: 0
         }
         fs.writeFile("./coins.json", JSON.stringify(coinFile), (err) => {
-            if (err) console.log(err);
         });
     }
 
