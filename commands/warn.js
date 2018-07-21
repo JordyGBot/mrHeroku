@@ -4,7 +4,7 @@ const ms = require("ms");
 
 module.exports.run = async(bot, message, args) => {
 
-	let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
+	let warns = JSON.parse(fs.readFileSync("../warnings.json", "utf8"));
 
 	if(!message.member.roles.some(r=>['Owner', 'Admin', 'Moderator'].includes(r.name))){
 		return message.author.send("You do not have the permissions to mute members.");
@@ -27,7 +27,6 @@ module.exports.run = async(bot, message, args) => {
 	warns[wUser.id].warns++;
 
 	fs.writeFile("./warnings.json", JSON.stringify(warns), (err) => {
-		if (err) console.leg(err);
 	});
 
 	let warnembed = new Discord.RichEmbed()
