@@ -35,7 +35,6 @@ module.exports.run = async (bot, message, args) => {
             gold: amountOfCoins
         }
         fs.writeFile("./coins.json", JSON.stringify(coinFile), (err) => {
-            if (err) console.log(err);
         })
 
         let giveembed = new Discord.RichEmbed()
