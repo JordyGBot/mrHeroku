@@ -9,8 +9,6 @@ module.exports.run = async (bot, message, args) => {
 
     let gUser = message.author;
 
-    console.log(gUser.username);
-
     if(!args[0]){
         return message.channel.send("Please specify an amount of coins.");
     }
@@ -24,8 +22,6 @@ module.exports.run = async (bot, message, args) => {
     if(!rUser){
         return message.author.send(`Could not indentify ${rUser} in ${message.guild.name}.`)
     }
-
-    console.log(rUser.user.username);
 
     let amountOfCoins = parseInt(args.join(" ").slice(22));
 
@@ -45,7 +41,6 @@ module.exports.run = async (bot, message, args) => {
             gold: coinFile[gUser.id].gold - amountOfCoins
         };
         fs.writeFile("./coins.json", JSON.stringify(coinFile), (err) => {
-            if (err) console.log(err)
         });
 
         let sendembed = new Discord.RichEmbed()
