@@ -1,14 +1,14 @@
-const botconfig = require("../botconfig.json");
-const tokenfile = require("../token.json");
+const botconfig = require("./botconfig.json");
+const tokenfile = require("./token.json");
 const Discord = require("discord.js");
 const fs = require("fs");
 const bot = new Discord.Client({disableEveryone: true});
-let fixesOnline = JSON.parse(fs.readFileSync("../prefixes.json", "utf8"));
-let coinFile = JSON.parse(fs.readFileSync("../coins.json", "utf8"));
+let fixesOnline = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
+let coinFile = JSON.parse(fs.readFileSync("./coins.json", "utf8"));
 
 bot.rpgcomponents = new Discord.Collection();
 
-fs.readdir("../rpgfolder/", (err,files) =>{
+fs.readdir("./rpgfolder/", (err,files) =>{
 
 	let rpgjsfile = files.filter(f => f.split(".").pop() === "js")
 	if (rpgjsfile.length <= 0){
@@ -16,14 +16,14 @@ fs.readdir("../rpgfolder/", (err,files) =>{
 	}
 
 	rpgjsfile.forEach((f,i) => {
-		let rpgprops = require(`../rpgfolder/${f}`);
+		let rpgprops = require(`./rpgfolder/${f}`);
 		bot.rpgcomponents.set(rpgprops.help.name, rpgprops);
 	});
 })
 
 bot.commands = new Discord.Collection();
 
-fs.readdir("../commands/", (err, files) =>{
+fs.readdir("./commands/", (err, files) =>{
 
 	let jsfile = files.filter(f => f.split(".").pop() === "js");
 	
@@ -32,7 +32,7 @@ fs.readdir("../commands/", (err, files) =>{
 	}
 
 	jsfile.forEach((f, i) => {
-		let props = require(`../commands/${f}`);
+		let props = require(`./commands/${f}`);
 		bot.commands.set(props.help.name, props);
 	});
 
@@ -43,7 +43,7 @@ bot.on("ready", async () => {
 });
 
 bot.on("guildMemberAdd", async member => {
-	let custPrefixes = JSON.parse(fs.readFileSync("../prefixes.json", "utf8"));
+	let custPrefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
 	let welcomechannel = member.guild.channels.find(`name`, "general");
 	welcomechannel.send(`<@${member.id}> has joined the server! Welcome!`);
 	member.send(`The prefix for ${member.guild.name} is ${custPrefixes[member.guild.id].custPrefixes}`)
@@ -56,18 +56,18 @@ bot.on("guildMemberRemove", async member => {
 
 bot.on("message", async message => {
 
-	let playerItemFile = JSON.parse(fs.readFileSync("../playeritems.json", "utf8"));
+	let playerItemFile = JSON.parse(fs.readFileSync("./playeritems.json", "utf8"));
 
 	if (message.author.bot) return;
 	if (message.channel.type === "dm") return;
 
-	let custPrefixes = JSON.parse(fs.readFileSync("../prefixes.json", "utf8"));
+	let custPrefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
 
 	if(!custPrefixes[message.guild.id]){
 		custPrefixes[message.guild.id] = {
 			custPrefixes: botconfig.prefix, rpgPrefixes: botconfig.rpgprefix
 		};
-		fs.writeFile("../prefixes.json", JSON.stringify(custPrefixes), (err) => {
+		fs.writeFile("./prefixes.json", JSON.stringify(custPrefixes), (err) => {
 		});
 	}
 
@@ -75,7 +75,7 @@ bot.on("message", async message => {
 		playerItemFile[message.author.id] = {
 			swords: 0, pickaxes: 0
 		};
-		fs.writeFile("../playeritems.json", JSON.stringify(playerItemFile), (err) => {
+		fs.writeFile("./playeritems.json", JSON.stringify(playerItemFile), (err) => {
 		});
 	}
 
@@ -83,7 +83,7 @@ bot.on("message", async message => {
 		coinFile[message.author.id] = {
 			gold: 0
 		};
-		fs.writeFile("../coins.json", JSON.stringify(coinFile), (err) => {
+		fs.writeFile("./coins.json", JSON.stringify(coinFile), (err) => {
 		});
 	}
 
@@ -97,7 +97,7 @@ bot.on("message", async message => {
 		coinFile[message.author.id] = {
 			gold: coinFile[message.author.id].gold + addAmount
 		};
-	fs.writeFile("../coins.json", JSON.stringify(coinFile), (err) => {
+	fs.writeFile("./coins.json", JSON.stringify(coinFile), (err) => {
 	});
 
 	let coinembed = new Discord.RichEmbed()
