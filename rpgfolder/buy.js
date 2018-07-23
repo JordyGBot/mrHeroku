@@ -1,12 +1,12 @@
 const Discord = require("discord.js");
 const fs = require("fs");
-const itemStats = require("../items.json");
+const itemStats = require("./items.json");
 
 module.exports.run = (bot, message, args) => {
 
-    let playerItemFile = JSON.parse(fs.readFileSync(".../playeritems.json", "utf8"));
+    let playerItemFile = JSON.parse(fs.readFileSync("../playeritems.json", "utf8"));
     
-    let playerCoins = JSON.parse(fs.readFileSync(".../coins.json", "utf8"));
+    let playerCoins = JSON.parse(fs.readFileSync("../coins.json", "utf8"));
     
     let bUser = message.author;
 
@@ -14,7 +14,7 @@ module.exports.run = (bot, message, args) => {
         playerItemFile[bUser.id] = {
             swords: 0, pickaxes: 0
         };
-        fs.writeFile(".../playeritems.json", JSON.stringify(playerItemFile), (err) => {
+        fs.writeFile("../playeritems.json", JSON.stringify(playerItemFile), (err) => {
         });
     }
 
@@ -22,7 +22,7 @@ module.exports.run = (bot, message, args) => {
         playerCoins[message.author.id] = {
             gold: 0
         };
-        fs.writeFile(".../coins.json", JSON.stringify(playerCoins), (err) =>{
+        fs.writeFile("../coins.json", JSON.stringify(playerCoins), (err) =>{
         });
     }
 
@@ -42,7 +42,7 @@ module.exports.run = (bot, message, args) => {
         playerItemFile[bUser.id] = {
             swords: playerItemFile[bUser.id].swords + 1, pickaxes: playerItemFile[bUser.id].pickaxes
         };
-        fs.writeFile(".../playeritems.json", JSON.stringify(playerItemFile), (err) => {
+        fs.writeFile("../playeritems.json", JSON.stringify(playerItemFile), (err) => {
         });
     }
 
@@ -50,7 +50,7 @@ module.exports.run = (bot, message, args) => {
         playerItemFile[bUser.id] = {
             swords: playerItemFile[bUser.id].swords, pickaxes: playerItemFile[bUser.id].pickaxes + 1
         };
-        fs.writeFile(".../playeritems.json", JSON.stringify(playerItemFile), (err) => {
+        fs.writeFile("../playeritems.json", JSON.stringify(playerItemFile), (err) => {
         });
     }
 
@@ -58,7 +58,7 @@ module.exports.run = (bot, message, args) => {
         gold: playerCoins[bUser.id].gold - parseInt(itemStats[args[0]].price)
     };
 
-    fs.writeFile(".../coins.json", JSON.stringify(playerCoins), (err) => {
+    fs.writeFile("../coins.json", JSON.stringify(playerCoins), (err) => {
     });
 
     let botchannel = message.guild.channels.find(`name`, "general");
