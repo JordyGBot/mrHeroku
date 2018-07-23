@@ -5,7 +5,7 @@ module.exports.run = (bot, message, args) => {
     
     let botchannel = message.guild.channels.find(`name`, "general");
 
-    let playerItemFile = JSON.parse(fs.readFileSync(".../playeritems.json", "utf8"));
+    let playerItemFile = JSON.parse(fs.readFileSync("../playeritems.json", "utf8"));
 
     let iUser = message.author;
 
